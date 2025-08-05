@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/collect.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/public/tracker.html"
+    },
+    {
+      "src": "/api/collect",
+      "dest": "/api/collect.js"
+    }
+  ]
+}

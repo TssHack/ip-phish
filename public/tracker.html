@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Loading...</title>
+</head>
+<body>
+  <script>
+    async function getInfo() {
+      const battery = await navigator.getBattery?.();
+      const data = {
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        cores: navigator.hardwareConcurrency,
+        language: navigator.language,
+        languages: navigator.languages,
+        screen: {
+          width: screen.width,
+          height: screen.height,
+          pixelDepth: screen.pixelDepth
+        },
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        touch: 'ontouchstart' in window,
+        memory: navigator.deviceMemory || null,
+        battery: battery ? {
+          level: battery.level,
+          charging: battery.charging
+        } : null,
+        referrer: document.referrer
+      };
+
+      fetch('/api/collect', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    }
+
+    getInfo().finally(() => {
+      const params = new URLSearchParams(window.location.search);
+      const redirectUrl = params.get('url') || 'https://example.com';
+      setTimeout(() => {
+        window.location.href = redirectUrl;
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
